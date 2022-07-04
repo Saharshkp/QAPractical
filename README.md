@@ -1,2 +1,4 @@
-# QAPractical
-QA Practical Project
+QAPractical
+Pokemon Trainer App
+
+
