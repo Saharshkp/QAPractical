@@ -3,9 +3,9 @@ from flask import request
 from application import app
 import random as rd 
 
-@app.route('/final', methods=['POST'])
-def final():
-    types = ''
+@app.route('/level', methods=['POST'])
+def level():
+    level = 0
     data = request.get_json()
     if data['Pokemon'] == 'Moltres':
         level += 99
@@ -37,3 +37,4 @@ def final():
         level += 100
 
     return str(level)
+    

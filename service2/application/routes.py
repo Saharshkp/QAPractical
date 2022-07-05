@@ -5,4 +5,4 @@ Pokemons = ['Moltres','Articuno','Zapdos','Charizard','Blastoise','Venasaur','Dr
 
 @app.route('/Pokemon', methods=['GET'])
 def Pokemon():
-    return rd.choice(Pokemon)
+    return rd.choice(Pokemons)
