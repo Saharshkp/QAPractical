@@ -1,45 +1,49 @@
-pipeline{
-    agent any   
-        stages{
-            stage('Clone Git repo'){
-                steps{
-                    sh "git clone https://github.com/Saharshkp/QAPractical"
-                }
-            }
-            stage('Run unit tests'){
-                steps {
-                    sh "bash test.sh"
-                }
-            }
-            // stage('Test'){
-            //     steps{
-            //         sh "sudo apt-get update"
-            //         sh "sudo apt install curl -y"
-            //         sh "curl https://get.docker.com | sudo bash"
-            //         sh "sudo usermod -aG docker $(whoami)"
-            //     }
-            // }
-            
-            
-            stage('Deploy'){
-                agent{
-                    label 'runner'
-                }
-                steps{
-                    sh "sudo apt-get update"
-                    sh "sudo apt install curl -y"
-                    sh "version=$(curl -s https://api.github.com/repos/docker/compose/releases/latest | jq -r '.tag_name')"
-                    sh "sudo curl -L https://github.com/docker/compose/releases/download/${version}/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose"
-                    sh "sudo chmod +x /usr/local/bin/docker-compose"
-                    sh "docker-compose --version"
-                }
-            }
-            
-            
-            stage('Curl'){
-                steps{
-                    sh "sudo docker-compose pull && sudo -E DB_PASSWORD=${DB_PASSWORD} docker-compose up -d"
-                }
+pipeline {
+    agent any
+    stages {
+        stage('Pytest') {
+            agent { 
+                label 'tester'
+            }            
+            steps {
+                //
+                git branch: 'main', url: 'https://github.com/Saharshkp/QAPractical'
+                sh '''#!/bin/bash
+                python3 -m venv venv
+                source venv/bin/activate
+                pip3 install -r requirements.txt
+                pip3 install pytest pytest-cov
+                python3 -m pytest --cov=application'''
             }
         }
+        stage('Pip install') {
+            agent { 
+                label 'runner'
+            }
+            steps {
+                //
+                git branch: 'main', url: 'https://github.com/Saharshkp/QAPractical'
+                sh '''#!/bin/bash
+                python3 -m venv venv
+                source venv/bin/activate
+                pip3 install -r requirements.txt
+                pip3 install gunicorn'''
+            }
+        }
+        stage('Deploy') {
+            agent { 
+                label 'runner'
+            }            
+            steps {
+                //
+                git branch: 'main', url: 'https://github.com/Saharshkp/QAPractical'
+                sh '''#!/bin/bash
+                if [ -f  /tmp/gpidfile ]
+                  then kill $(cat /tmp/gpidfile)
+                fi
+                source venv/bin/activate
+                JENKINS_NODE_COOKIE=nokill gunicorn application:app -D -w 4 -b 0.0.0.0:5000 -p /tmp/gpidfile'''
+            }
+        }
+    }
 }
