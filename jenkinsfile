@@ -11,6 +11,15 @@ pipeline{
                     sh "bash test.sh"
                 }
             }
+            // stage('Test'){
+            //     steps{
+            //         sh "sudo apt-get update"
+            //         sh "sudo apt install curl -y"
+            //         sh "curl https://get.docker.com | sudo bash"
+            //         sh "sudo usermod -aG docker $(whoami)"
+            //     }
+            // }
+            
             stage('Deploy'){
                 steps{
                     sh "sudo apt-get update"
@@ -28,4 +37,4 @@ pipeline{
                 }
             }
         }
-    }
+}
