@@ -4,12 +4,7 @@ pipeline {
         stage('Pytest') {  
             steps {
                 git branch: 'main', url: 'https://github.com/Saharshkp/QAPractical'
-                sh '''#!/bin/bash
-                python3 -m venv venv
-                source venv/bin/activate
-                pip3 install -r requirements.txt
-                pip3 install pytest pytest-cov
-                python3 -m pytest --cov=application'''
+                sh './test.sh'
             }
         }
         stage('Pip install'){
