@@ -1,5 +1,5 @@
 #!/bin/bash
-declare -a directories=("front" "random_pokemon" "random_rarity" "level")
+declare -a directories=("service1" "service2" "service3" "service4")
 for dir in "${directories[@]}"
 do
   cd ${dir}
