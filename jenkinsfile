@@ -2,8 +2,7 @@ pipeline {
     agent any
     stages {
         stage('Pytest') {
-            agent { 
-                label 'tester'
+
             }            
             steps {
                 //
@@ -17,8 +16,7 @@ pipeline {
             }
         }
         stage('Pip install') {
-            agent { 
-                label 'runner'
+
             }
             steps {
                 //
@@ -31,8 +29,7 @@ pipeline {
             }
         }
         stage('Deploy') {
-            agent { 
-                label 'runner'
+
             }            
             steps {
                 //
