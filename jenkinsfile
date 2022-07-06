@@ -20,7 +20,11 @@ pipeline{
             //     }
             // }
             
+            
             stage('Deploy'){
+                agent{
+                    label 'runner'
+                }
                 steps{
                     sh "sudo apt-get update"
                     sh "sudo apt install curl -y"
