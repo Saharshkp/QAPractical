@@ -1,11 +1,8 @@
 pipeline {
     agent any
     stages {
-        stage('Pytest') {
-
-            }            
+        stage('Pytest') {  
             steps {
-                //
                 git branch: 'main', url: 'https://github.com/Saharshkp/QAPractical'
                 sh '''#!/bin/bash
                 python3 -m venv venv
@@ -15,11 +12,8 @@ pipeline {
                 python3 -m pytest --cov=application'''
             }
         }
-        stage('Pip install') {
-
-            }
+        stage('Pip install'){
             steps {
-                //
                 git branch: 'main', url: 'https://github.com/Saharshkp/QAPractical'
                 sh '''#!/bin/bash
                 python3 -m venv venv
@@ -29,10 +23,7 @@ pipeline {
             }
         }
         stage('Deploy') {
-
-            }            
             steps {
-                //
                 git branch: 'main', url: 'https://github.com/Saharshkp/QAPractical'
                 sh '''#!/bin/bash
                 if [ -f  /tmp/gpidfile ]
