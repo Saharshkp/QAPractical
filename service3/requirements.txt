@@ -1,2 +1,5 @@
-flask
+Flask
+requests
 pytest
+flask-testing
+pytest-cov
