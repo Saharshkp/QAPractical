@@ -24,7 +24,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh "scp -i ~/.ssh/id_rsa docker-compose.yaml swarmmanager:/home/spacebook/QAPractical/docker-compose.yaml"
+                sh "scp -i ~/.ssh/id_rsa docker-compose.yaml swarmmanager:~/QAPractical/docker-compose.yaml"
                 sh "scp -i ~/.ssh/id_rsa nginx.conf swarmmanager:/home/spacebook/QAPractical/nginx.conf"
                 sh "ansible-playbook -i ansible/inventory.yaml ansible/playbook.yaml"
             }
