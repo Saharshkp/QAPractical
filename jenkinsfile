@@ -24,13 +24,26 @@ pipeline {
         }
         stage('Ansible Deploy') {
             steps {
-                sh "scp -i ~/.ssh/id_rsa docker-compose.yaml swarmmanager:/home/spacebook/QAPractical/docker-compose.yaml"
-                sh "scp -i ~/.ssh/id_rsa nginx.conf swarmmanager:/home/spacebook/QAPractical/nginx.conf"
+                sh "scp -i ~/.ssh/id_rsa docker-compose.yaml spacebook@swarmmanager:/home/spacebook/QAPractical/docker-compose.yaml"
+                sh "scp -i ~/.ssh/id_rsa nginx.conf spacebook@swarmmanager:/home/spacebook/QAPractical/nginx.conf"
                 sh "ansible-playbook ansible/inventory.yaml -i ansible/playbook.yaml"
             }
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 //         stage('Ansible Deployment'){
 //             steps{
 //                 git branch: 'main',url: 'git@github.com:Saharshkp/QAPractical.git'
@@ -61,26 +74,6 @@ pipeline {
 //                 sh ''' curl swarmmanager
 //                 curl swarmworker
 //                 '''
-//             }
-//         }
-//     }
-// }
-
-
-
-
-
-
-        
-//         stage('Deploy') {
-//             steps {
-//                 git branch: 'main', url: 'https://github.com/Saharshkp/QAPractical'
-//                 sh '''#!/bin/bash
-//                 if [ -f  /tmp/gpidfile ]
-//                   then kill $(cat /tmp/gpidfile)
-//                 fi
-//                 source venv/bin/activate
-//                 JENKINS_NODE_COOKIE=nokill gunicorn application:app -D -w 4 -b 0.0.0.0:5000 -p /tmp/gpidfile'''
 //             }
 //         }
 //     }
