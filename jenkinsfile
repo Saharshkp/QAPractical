@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    environment {
+    DOCKER_HUB_CREDS_USR = credentials('docker-hub-usr')
+    DOCKER_HUB_CREDS_PSW = credentials('docker-hub-psw')
+    }
     stages {
         stage('Pytest') {  
             steps {
@@ -18,16 +22,57 @@ pipeline {
                 pip3 install gunicorn'''
             }
         }
-        stage('Deploy') {
-            steps {
-                git branch: 'main', url: 'https://github.com/Saharshkp/QAPractical'
-                sh '''#!/bin/bash
-                if [ -f  /tmp/gpidfile ]
-                  then kill $(cat /tmp/gpidfile)
-                fi
-                source venv/bin/activate
-                JENKINS_NODE_COOKIE=nokill gunicorn application:app -D -w 4 -b 0.0.0.0:5000 -p /tmp/gpidfile'''
+        stage('Ansible Deployment'){
+            steps{
+                git branch: 'main',url: 'git@github.com:Saharshkp/QAPractical.git'
+                sh 'ssh spaceboook@ansible /usr/bin/ansible-playbook -i ansible/inventory ansible/playbook.yaml'
+            }
+        }
+        stage('Docker login and build'){
+            steps{
+                sh '''docker-compose build 
+                    docker login --username $DOCKER_HUB_CREDS_USR --password $DOCKER_HUB_CREDS_PSW
+                    docker-compose push'''
+            }
+        }
+
+        stage('Deploy to swarm'){
+            steps{
+
+                sh '''scp docker-compose.yaml spacebook@swarmmanager:/home/spacebook/
+                scp nginx.conf spacebook@swarmmanager:/home/spacebook/
+                ssh spacebook@swarmmanager docker stack deploy --compose-file docker-compose.yaml deployment-stack
+                sleep 25
+                '''
+            }
+        }
+            
+        stage('Curl'){
+            steps{
+                sh ''' curl swarmmanager
+                curl swarmworker
+                '''
             }
         }
     }
 }
+
+
+
+
+
+
+        
+//         stage('Deploy') {
+//             steps {
+//                 git branch: 'main', url: 'https://github.com/Saharshkp/QAPractical'
+//                 sh '''#!/bin/bash
+//                 if [ -f  /tmp/gpidfile ]
+//                   then kill $(cat /tmp/gpidfile)
+//                 fi
+//                 source venv/bin/activate
+//                 JENKINS_NODE_COOKIE=nokill gunicorn application:app -D -w 4 -b 0.0.0.0:5000 -p /tmp/gpidfile'''
+//             }
+//         }
+//     }
+// }
