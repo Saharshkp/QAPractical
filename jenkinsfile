@@ -26,7 +26,7 @@ pipeline {
             steps {
                 sh "scp -i ~/.ssh/id_rsa docker-compose.yaml spacebook@swarmmanager:/home/spacebook/QAPractical/docker-compose.yaml"
                 sh "scp -i ~/.ssh/id_rsa nginx.conf spacebook@swarmmanager:/home/spacebook/QAPractical/nginx.conf"
-                sh "ssh spacebook@swarmmanager 'ansible-playbook ansible/inventory -i ansible/playbook.yaml'"
+                sh "ssh spacebook@swarmmanager 'ansible-playbook /home/spacebook/QAPractical/ansible/inventory -i spacebook/QAPractical/ansible/playbook.yaml'"
             }
         }
     }
