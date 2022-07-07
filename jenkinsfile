@@ -22,40 +22,49 @@ pipeline {
                 pip3 install gunicorn'''
             }
         }
-        stage('Ansible Deployment'){
-            steps{
-                git branch: 'main',url: 'git@github.com:Saharshkp/QAPractical.git'
-                sh 'ssh spaceboook@ansible /usr/bin/ansible-playbook -i ansible/inventory ansible/playbook.yaml'
-            }
-        }
-        stage('Docker login and build'){
-            steps{
-                sh '''docker-compose build 
-                    docker login --username $DOCKER_HUB_CREDS_USR --password $DOCKER_HUB_CREDS_PSW
-                    docker-compose push'''
-            }
-        }
-
-        stage('Deploy to swarm'){
-            steps{
-
-                sh '''scp docker-compose.yaml spacebook@swarmmanager:/home/spacebook/
-                scp nginx.conf spacebook@swarmmanager:/home/spacebook/
-                ssh spacebook@swarmmanager docker stack deploy --compose-file docker-compose.yaml deployment-stack
-                sleep 25
-                '''
-            }
-        }
-            
-        stage('Curl'){
-            steps{
-                sh ''' curl swarmmanager
-                curl swarmworker
-                '''
+        stage('Deploy') {
+            steps {
+                sh "scp -i ~/.ssh/ansible_id_rsa docker-compose.yaml swarm-master:/home/jenkins/docker-compose.yaml"
+                sh "scp -i ~/.ssh/ansible_id_rsa nginx.conf swarm-master:/home/jenkins/nginx.conf"
+                sh "ansible-playbook -i configuration/inventory.yaml configuration/playbook.yaml"
             }
         }
     }
 }
+//         stage('Ansible Deployment'){
+//             steps{
+//                 git branch: 'main',url: 'git@github.com:Saharshkp/QAPractical.git'
+//                 sh 'ssh spaceboook@ansible /usr/bin/ansible-playbook -i ansible/inventory ansible/playbook.yaml'
+//             }
+//         }
+//         stage('Docker login and build'){
+//             steps{
+//                 sh '''docker-compose build 
+//                     docker login --username $DOCKER_HUB_CREDS_USR --password $DOCKER_HUB_CREDS_PSW
+//                     docker-compose push'''
+//             }
+//         }
+
+//         stage('Deploy to swarm'){
+//             steps{
+
+//                 sh '''scp docker-compose.yaml spacebook@swarmmanager:/home/spacebook/
+//                 scp nginx.conf spacebook@swarmmanager:/home/spacebook/
+//                 ssh spacebook@swarmmanager docker stack deploy --compose-file docker-compose.yaml deployment-stack
+//                 sleep 25
+//                 '''
+//             }
+//         }
+            
+//         stage('Curl'){
+//             steps{
+//                 sh ''' curl swarmmanager
+//                 curl swarmworker
+//                 '''
+//             }
+//         }
+//     }
+// }
 
 
 
