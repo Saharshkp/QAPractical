@@ -1,9 +1,5 @@
 pipeline {
     agent any
-    environment {
-    DOCKER_HUB_CREDS_USR = credentials('docker-hub-usr')
-    DOCKER_HUB_CREDS_PSW = credentials('docker-hub-psw')
-    }
     stages {
         stage('Pytest') {  
             steps {
@@ -28,14 +24,6 @@ pipeline {
                 sh "scp -i ~/.ssh/id_rsa nginx.conf spacebook@swarmmanager:/home/spacebook/QAPractical/nginx.conf"
                 sh "ssh spacebook@swarmmanager 'ansible-playbook -i /home/spacebook/QAPractical/ansible/inventory /home/spacebook/QAPractical/ansible/playbook.yaml'"
             }
-        }
-        stage('Docker login and build'){
-                steps{
-                    sh '''docker-compose build 
-                        docker login --username $DOCKER_HUB_CREDS_USR --password $DOCKER_HUB_CREDS_PSW
-                        docker-compose push'''
-            }
         }    
-
     }
 }
