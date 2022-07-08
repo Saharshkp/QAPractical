@@ -58,14 +58,78 @@ Jenkins
 
 Jenkins is going to be used to automatically to deploy the whole app. This is done by using a jenkins file which is on the development VM, I also added a webhook so that when you push something to github jenkins automatically runs the jenkins file. Within the jenkins file we have mulitple stages within the pipeline.
 
+Docker Hub- Log into docker hub and build the new containers
+
 Testing - Testing the pytest within the application
 
 Ansible Deployment - Automatically runs the ansible playbook and does everything within it
 
-
 Once all this has been complete the project will be deployed onto the swarm and will be able to be accessed from the swarm ip
 
-Here are some images of the jenkins pipeline terminal in which each stage has been complete, with comments.
+
+
+Jenkins Pipeline Test Images
 
 
 
+Serivce 1 test
+
+<img width="655" alt="Screenshot 2022-07-06 at 17 39 42" src="https://user-images.githubusercontent.com/104978039/177979387-f0ae48d3-dbac-4cfd-bd97-dfb8c89ac061.png">
+
+
+Service 2 test
+
+<img width="657" alt="Screenshot 2022-07-06 at 17 39 51" src="https://user-images.githubusercontent.com/104978039/177979320-3ca3e538-1418-402c-a61c-324bbe22cff8.png">
+
+
+Service 3 test
+
+<img width="647" alt="Screenshot 2022-07-06 at 17 39 58" src="https://user-images.githubusercontent.com/104978039/177979487-8b492211-6852-413f-81b8-9cbe2b0b24bd.png">
+
+
+Service 4 test
+
+<img width="647" alt="Screenshot 2022-07-06 at 17 40 08" src="https://user-images.githubusercontent.com/104978039/177979525-916cd5c0-d055-4479-9a60-55d413f23490.png">
+
+
+Ansible Deployment in Shell Script
+
+<img width="1429" alt="Screenshot 2022-07-07 at 14 45 14" src="https://user-images.githubusercontent.com/104978039/177979701-895297b9-1383-44ec-a491-ba8e25bf2ddd.png">
+
+
+
+CI-CD Pipeline
+
+
+<img width="689" alt="Screenshot 2022-07-08 at 12 09 25" src="https://user-images.githubusercontent.com/104978039/177981284-5b7d2c09-9287-4df2-8d49-f015036e6434.png">
+
+
+
+Future Updates
+
+
+With more time for this project, I would impliment a button to refresh the random generator and also add a history section where all past Pokemon can be viewed with all their statistics. For this I will need to add a database to store all the outputs.
+
+
+
+Challenges
+
+
+A challenge I faced was to understand a how to correctly code a docker-compose.yaml file. With a lot of research and practise, I was able to perfect this and have it fully running.
+The same goes for the jenkinsfile. Generating the script correctly and using the stages to correctly execute tests and also the Ansible deployment.
+
+
+
+Conclusion
+
+
+I believe I have successfully shown my improvement in this project from the fundamentals work. Being able to overcome difficulties from then a lot more easily and tackling more complex concepts such as using Jenkins with Ansible for example. I am definitely more confident on my abilities as a novice developer especially working with deployment programs. Being able to understand how all the parts come to together from Docker images to Jenkins reading containers has allowed me to think and act as a more experience developer. I understand that this application is still very basic however, as a foundation I believe it shows my journey of learning.
+
+
+
+Acknowledgements
+
+
+Adam Gray
+
+Leon Robinson
