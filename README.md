@@ -93,30 +93,46 @@ Once all this has been complete the project will be deployed onto the swarm and 
 Jenkins Pipeline Test Images
 
 
+Finished Jenkins Pipeline image:
+
+
+<img width="777" alt="Screenshot 2022-07-07 at 14 45 29" src="https://user-images.githubusercontent.com/104978039/177996723-60da0ad3-e6c6-4aa1-8c13-1be02d49639d.png">
+
+
 
 Serivce 1 test
+
 
 <img width="655" alt="Screenshot 2022-07-06 at 17 39 42" src="https://user-images.githubusercontent.com/104978039/177979387-f0ae48d3-dbac-4cfd-bd97-dfb8c89ac061.png">
 
 
 Service 2 test
 
+
 <img width="657" alt="Screenshot 2022-07-06 at 17 39 51" src="https://user-images.githubusercontent.com/104978039/177979320-3ca3e538-1418-402c-a61c-324bbe22cff8.png">
 
 
 Service 3 test
+
 
 <img width="647" alt="Screenshot 2022-07-06 at 17 39 58" src="https://user-images.githubusercontent.com/104978039/177979487-8b492211-6852-413f-81b8-9cbe2b0b24bd.png">
 
 
 Service 4 test
 
+
 <img width="647" alt="Screenshot 2022-07-06 at 17 40 08" src="https://user-images.githubusercontent.com/104978039/177979525-916cd5c0-d055-4479-9a60-55d413f23490.png">
 
 
 Ansible Deployment in Shell Script
 
+
 <img width="1429" alt="Screenshot 2022-07-07 at 14 45 14" src="https://user-images.githubusercontent.com/104978039/177979701-895297b9-1383-44ec-a491-ba8e25bf2ddd.png">
+
+
+Pipeline completed with Swarm
+
+<img width="1034" alt="Screenshot 2022-07-08 at 14 02 02" src="https://user-images.githubusercontent.com/104978039/177997206-7c97aca7-173f-4ba8-afc7-2c5cf617e616.png">
 
 
 
