@@ -32,6 +32,24 @@ Service 4
 This service accumalates all the information. All the hard coded values of the class rarity and Pokemon will be used to calculate the level of the Pokemon, which can be seen by the user.
 
 
+Application as seen by a user from a browser:
+
+
+<img width="475" alt="Screenshot 2022-07-08 at 13 51 53" src="https://user-images.githubusercontent.com/104978039/177996000-56f4d920-a1d9-4991-a6bc-1ddcef1652dd.png">
+
+
+Application in terminal using:
+
+curl localhost
+
+
+<img width="444" alt="Screenshot 2022-07-08 at 13 51 31" src="https://user-images.githubusercontent.com/104978039/177996191-a08e621f-4a9a-4882-baec-54366c3cf8d4.png">
+
+
+<img width="410" alt="Screenshot 2022-07-08 at 13 50 53" src="https://user-images.githubusercontent.com/104978039/177996210-9d3298f0-9f5a-42f1-a4e1-f73cd6970ffd.png">
+
+
+
 
 Requirements for the Minimum Viable Product
 
@@ -40,6 +58,10 @@ Requirements for the Minimum Viable Product
 A Kanban Board
 
 This board made via Trello illustrates all the prelimenary tasks throughout the project. Also, it will include the user story and records of difficulties faced.
+
+
+<img width="1406" alt="Screenshot 2022-07-08 at 13 56 41" src="https://user-images.githubusercontent.com/104978039/177996378-8625e9a4-e443-4192-87fc-27d41bd3b4ab.png">
+
 
 
 Risk Assessment
