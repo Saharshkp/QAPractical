@@ -34,24 +34,8 @@ pipeline {
                     sh '''docker-compose build 
                         docker login --username $DOCKER_HUB_CREDS_USR --password $DOCKER_HUB_CREDS_PSW
                         docker-compose push'''
-                }
             }
+        }    
 
-            stage('Swarm Deployment'){
-                steps{
-
-                    sh '''scp docker-compose.yaml spacebook@swarmmanager:/home/spacebook/
-                    scp nginx.conf spacebook@swarmmanager:/home/spacebook/
-                    ssh spacebook@swarmmanager docker stack deploy --compose-file docker-compose.yaml deployment-stack'''
-                }
-            }
-            
-            stage('Curl'){
-                steps{
-                    sh ''' curl swarmmanager
-                    curl swarmworker
-                    '''
-                }
-            }
     }
 }
