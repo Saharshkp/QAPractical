@@ -21,7 +21,7 @@ This service will be the frontend of the application. The user will view this se
 
 Service 2
 
-This will be the first randomized value. A Pookemon will be chosen.
+This will be the first randomized value. A Pokemon will be chosen.
 
 Service 3
 
